@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/profile_tile_model.dart';
 
-ProfileData ronanProfile = ProfileData(
+ProfileData teddyProfile = ProfileData(
   name: "Teddy",
   position: "Flutter Developer",
   avatarUrl: 'teddy.JPG',

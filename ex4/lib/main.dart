@@ -4,32 +4,22 @@ import 'data/jokes.dart';
 
 final Color appColor = Colors.green.shade300;
 
-void main() => runApp(const FavoriteJokesApp());
-
-class FavoriteJokesApp extends StatelessWidget {
-  const FavoriteJokesApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const FavoriteJokesPage(),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: appColor),
-        useMaterial3: true,
-      ),
-    );
-  }
+void main() {
+  runApp(
+    MaterialApp(
+      home: FavoriteJokesList()
+    )
+  );
 }
 
-class FavoriteJokesPage extends StatefulWidget {
-  const FavoriteJokesPage({super.key});
+class FavoriteJokesList extends StatefulWidget {
+  const FavoriteJokesList({super.key});
 
   @override
-  State<FavoriteJokesPage> createState() => _FavoriteJokesPageState();
+  State<FavoriteJokesList> createState() => _FavoriteJokesListState();
 }
 
-class _FavoriteJokesPageState extends State<FavoriteJokesPage> {
+class _FavoriteJokesListState extends State<FavoriteJokesList> {
   int? _favoriteJokeId;
 
   void _handleFavoriteSelected(int jokeId) {
@@ -43,17 +33,17 @@ class _FavoriteJokesPageState extends State<FavoriteJokesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: appColor,
-        title: const Text('Favorite Jokes'),
+        backgroundColor: appColor, 
+        title: const Text('Favorite Jokes')
       ),
       body: ListView.builder(
         itemCount: jokes.length,
         itemBuilder: (context, index) {
           final joke = jokes[index];
           return FavoriteCard(
-            joke: joke,
-            isFavorite: joke.id == _favoriteJokeId,
-            onFavoriteSelected: _handleFavoriteSelected,
+            joke: joke, 
+            isFavorite: joke.id == _favoriteJokeId, 
+            onFavoriteSelected: _handleFavoriteSelected
           );
         },
       ),
@@ -62,12 +52,7 @@ class _FavoriteJokesPageState extends State<FavoriteJokesPage> {
 }
 
 class FavoriteCard extends StatelessWidget {
-  const FavoriteCard({
-    super.key,
-    required this.joke,
-    required this.isFavorite,
-    required this.onFavoriteSelected,
-  });
+  const FavoriteCard({super.key, required this.joke, required this.isFavorite, required this.onFavoriteSelected});
 
   final Joke joke;
   final bool isFavorite;
@@ -77,11 +62,9 @@ class FavoriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: .5, color: Colors.grey),
-        ),
+        border: Border(bottom: BorderSide(width: .5, color: Colors.grey)),
       ),
-      padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
+      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,24 +75,21 @@ class FavoriteCard extends StatelessWidget {
                 Text(
                   joke.title,
                   style: TextStyle(
-                    color: appColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
+                    color: appColor, 
+                    fontWeight: FontWeight.w800, 
+                    fontSize: 16
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  joke.content,
-                  style: const TextStyle(fontSize: 14),
-                ),
+                Text(joke.content, style: const TextStyle(fontSize: 14)),
               ],
             ),
           ),
           IconButton(
             onPressed: () => onFavoriteSelected(joke.id),
             icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? Colors.red : Colors.grey,
+              isFavorite ? Icons.favorite : Icons.favorite_border, 
+              color: isFavorite ? Colors.red : Colors.grey
             ),
           ),
         ],
@@ -219,18 +199,11 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: FloatingActionButton(onPressed: _incrementCounter, tooltip: 'Increment', child: const Icon(Icons.add)),
     );
   }
 }
